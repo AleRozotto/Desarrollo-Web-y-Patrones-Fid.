@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+   
+    
+    <head>
+        <title>Practica01</title>
+        <meta charset="UTF-8">
+        
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <h2>Lista Paises</h2>
+        <a th:href="@{/nuevoEstado}">Nuevo Estado</a>
+        <div th:if="${estados != null and !estados.empty}">
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Estado</th>
+                    <th>Capital</th>
+                    <th>Poblacion</th>
+                    <th>Costas</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="estado : ${estados}">
+                    <td>[[${estado.estado}]]</td>
+                    <td>[[${estado.capital}]]</td>
+                    <td>[[${estado.poblacion}]]</td>
+                    <td>[[${estado.costas}]]</td>
+                    <td><a th:href="@{/modificarEstado/} + ${estado.idpais}" >Modificar</a></td>
+                    <td><a th:href="@{/eliminarEstado/} + ${estado.idpais}" >Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div th:if="${estados == or and estados.empty}">
+           No tenemos lista de paises que mostrar... 
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
+
+    </body>
+</html>
